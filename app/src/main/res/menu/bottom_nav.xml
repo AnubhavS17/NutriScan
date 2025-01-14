@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/HomeScreen"
+        android:title="Home"
+        android:icon="@drawable/ic_home_24"
+        />
+
+
+
+    <item
+        android:id="@+id/SavedProduct"
+        android:title="Saved"
+        android:icon="@drawable/ic_saved_24"
+        />
+       <!-- android:icon="@drawable/ic_search"-->
+
+
+    <item
+        android:id="@+id/Profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile_24"
+        />
+
+</menu>
