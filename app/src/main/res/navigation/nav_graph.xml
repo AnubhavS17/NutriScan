@@ -9,7 +9,11 @@
         android:id="@+id/HomeScreen"
         android:name="project.nutriscan.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_HomeScreen_to_scanBarcodeFragment"
+            app:destination="@id/scanBarcodeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/SavedProduct"
         android:name="project.nutriscan.ui.SavedFragment"
@@ -20,4 +24,9 @@
         android:name="project.nutriscan.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/scanBarcodeFragment"
+        android:name="project.nutriscan.ScanBarcodeFragment"
+        android:label="fragment_scan_barcode"
+        tools:layout="@layout/fragment_scan_barcode" />
 </navigation>
