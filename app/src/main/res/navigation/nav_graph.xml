@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/scanBarcodeFragment"
-        android:name="project.nutriscan.ScanBarcodeFragment"
+        android:name="project.nutriscan.ui.ScanBarcodeFragment"
         android:label="fragment_scan_barcode"
         tools:layout="@layout/fragment_scan_barcode" />
 </navigation>

@@ -2,6 +2,7 @@ package project.nutriscan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -22,5 +23,15 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         binding.bottomNavigation.setupWithNavController(navController)
+
+
+    }
+    fun showBottomNavigation()
+    {
+        binding.bottomNavigation.visibility = View.VISIBLE
+    }
+    fun hideBottomNavigation()
+    {
+        binding.bottomNavigation.visibility = View.GONE
     }
 }

@@ -51,6 +51,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
+    //Barcode Scanning Library
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.0'
+
     //---Navigation Component---//.
     def nav_version = "2.8.5"
     // Views/Fragments Integration
