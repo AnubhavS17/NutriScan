@@ -12,6 +12,7 @@ import android.webkit.PermissionRequest
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -49,6 +50,8 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Home"
 
 
         binding.scanBarcode.setOnClickListener {
