@@ -53,7 +53,6 @@ class HomeFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).supportActionBar?.title = "Home"
 
-
         binding.scanBarcode.setOnClickListener {
             handleCameraPermission()
             //findNavController().navigate(R.id.action_HomeScreen_to_scanBarcodeFragment)
