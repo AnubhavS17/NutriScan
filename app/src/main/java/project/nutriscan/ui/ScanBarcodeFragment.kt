@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
@@ -23,6 +24,7 @@ import project.nutriscan.databinding.FragmentScanBarcodeBinding
 class ScanBarcodeFragment : Fragment() {
     private var _binding: FragmentScanBarcodeBinding? = null
     private val binding get() = _binding!!
+    lateinit var barcode : String
 
     private lateinit var codeScanner: CodeScanner
 
@@ -49,13 +51,26 @@ class ScanBarcodeFragment : Fragment() {
 
         codeScanner.decodeCallback = DecodeCallback {
             activity.runOnUiThread {
-                Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
-                binding.currentScannedBarcode.text = it.text.toString()
+                barcode = it.text.toString()
+                Toast.makeText(activity, barcode, Toast.LENGTH_LONG).show()
+                binding.currentScannedBarcode.text = barcode
+
+                binding.ScanForProduct.setOnClickListener {
+                    /* findNavController().navigate(R.id.action_scanBarcodeFragment_to_productDetailFragment)*/
+                    if (!barcode.isNullOrEmpty()){
+                        val action = ScanBarcodeFragmentDirections.actionScanBarcodeFragmentToProductDetailFragment(barcode)
+                        findNavController().navigate(action)
+                    } else {
+                        Toast.makeText(requireActivity(),"No Barcode Detected",Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             }
         }
         scannerView.setOnClickListener {
             codeScanner.startPreview()
         }
+
     }
 
     override fun onResume() {

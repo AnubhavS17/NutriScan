@@ -28,5 +28,20 @@
         android:id="@+id/scanBarcodeFragment"
         android:name="project.nutriscan.ui.ScanBarcodeFragment"
         android:label="fragment_scan_barcode"
-        tools:layout="@layout/fragment_scan_barcode" />
+        tools:layout="@layout/fragment_scan_barcode" >
+        <action
+            android:id="@+id/action_scanBarcodeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="project.nutriscan.ui.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <argument
+            android:name="barcode"
+            app:argType="string"
+            android:defaultValue="">
+        </argument>
+    </fragment>
 </navigation>
