@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -29,6 +30,8 @@ class ProductDetailFragment : Fragment() {
         viewmodel = (activity as MainActivity).viewModel
         // Inflate the layout for this fragment
         _binding = FragmentProductDetailBinding.inflate(inflater)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Product Details"
 
         //API Call to retrieve data.
         val barcode = args.barcode

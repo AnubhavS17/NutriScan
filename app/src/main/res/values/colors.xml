@@ -61,6 +61,7 @@
     <color name="md_theme_dark_surfaceTint">#B3C5FF</color>
     <color name="md_theme_dark_outlineVariant">#45464F</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="cardView_Theme">#EEE5F6</color>
 <!--    <color name="black">#000000</color>-->
 <!--    -->
      <color name="black">#FF000000</color>

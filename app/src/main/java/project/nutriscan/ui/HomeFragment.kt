@@ -61,17 +61,17 @@ class HomeFragment : Fragment() {
 
 
         binding.SearchBarcode.setOnClickListener {
-            if (binding.editTextBarcode.text.isNotEmpty()) {
-                if (binding.editTextBarcode.text.length == 16) {
-                    var input: String = binding.editTextBarcode.text.toString()
-                    Toast.makeText(activity, input, Toast.LENGTH_SHORT).show()
+            val barcode = binding.editTextBarcode.text.toString()
+            if (barcode.isNotEmpty()) {
+                if (isValidEANBarcode(barcode)) {
+                    val action = HomeFragmentDirections.actionHomeScreenToProductDetailFragment(barcode)
+                    findNavController().navigate(action)
                 } else {
-                    Toast.makeText(activity, "Barcode must be 16 digit", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Barcode must be 13 digit EAN", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(activity, "Please enter a barcode", Toast.LENGTH_SHORT).show()
             }
-
         }
 
 
@@ -82,6 +82,10 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.action_HomeScreen_to_scanBarcodeFragment)
     }
 
+    fun isValidEANBarcode(barcode: String): Boolean {
+        // Check if the string contains only digits and has a length of 8 or 13
+        return barcode.matches("\\d+".toRegex()) && (barcode.length == 13)
+    }
 
    private fun handleCameraPermission() {
         when {
