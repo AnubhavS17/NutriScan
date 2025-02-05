@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
         binding.SearchBarcode.setOnClickListener {
             val barcode = binding.editTextBarcode.text.toString()
             if (barcode.isNotEmpty()) {
-                if (isValidEANBarcode(barcode)) {
+                if (isValidEan(barcode)) {
                     val action = HomeFragmentDirections.actionHomeScreenToProductDetailFragment(barcode)
                     findNavController().navigate(action)
                 } else {
@@ -82,9 +82,12 @@ class HomeFragment : Fragment() {
         findNavController().navigate(R.id.action_HomeScreen_to_scanBarcodeFragment)
     }
 
-    fun isValidEANBarcode(barcode: String): Boolean {
-        // Check if the string contains only digits and has a length of 8 or 13
-        return barcode.matches("\\d+".toRegex()) && (barcode.length == 13)
+    private fun isValidEan(barcode: String): Boolean {
+        if (barcode.length != 13) return false
+        val allDigits = barcode.map { it.toString().toInt() }
+        val s = if (barcode.length % 2 == 0) 3 else 1
+        val s2 = if (s == 3) 1 else 3
+        return allDigits.last() == (10 - (allDigits.take(barcode.length - 1).mapIndexed { ci, c -> c * (if (ci % 2 == 0) s else s2) }.sum() % 10)) % 10
     }
 
    private fun handleCameraPermission() {
