@@ -58,8 +58,14 @@ class ScanBarcodeFragment : Fragment() {
                 binding.ScanForProduct.setOnClickListener {
                     /* findNavController().navigate(R.id.action_scanBarcodeFragment_to_productDetailFragment)*/
                     if (!barcode.isNullOrEmpty()){
-                        val action = ScanBarcodeFragmentDirections.actionScanBarcodeFragmentToProductDetailFragment(barcode)
-                        findNavController().navigate(action)
+                        if(isValidEANBarcode(barcode)){
+                            val action = ScanBarcodeFragmentDirections.actionScanBarcodeFragmentToProductDetailFragment(barcode)
+                            findNavController().navigate(action)
+                        } else {
+                            Toast.makeText(requireActivity(),"Found Invalid Barcode Type",Toast.LENGTH_SHORT).show()
+                        }
+                        /*val action = ScanBarcodeFragmentDirections.actionScanBarcodeFragmentToProductDetailFragment(barcode)
+                        findNavController().navigate(action)*/
                     } else {
                         Toast.makeText(requireActivity(),"No Barcode Detected",Toast.LENGTH_SHORT).show()
                     }
@@ -71,6 +77,11 @@ class ScanBarcodeFragment : Fragment() {
             codeScanner.startPreview()
         }
 
+    }
+
+    fun isValidEANBarcode(barcode: String): Boolean {
+        // Check if the string contains only digits and has a length of 8 or 13
+        return barcode.matches("\\d+".toRegex()) && (barcode.length == 13)
     }
 
     override fun onResume() {
