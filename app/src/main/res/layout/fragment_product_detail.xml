@@ -203,7 +203,7 @@
                             android:id="@+id/allergen"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{`Allergen:` + productInfo.allergens}"
+                            android:text ="@{`Allergen:` + productInfo.allergens}"
                             android:textSize="16sp"
                             android:layout_marginBottom="4dp" />
                     </LinearLayout>
