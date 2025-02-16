@@ -40,6 +40,8 @@ class ProductDetailFragment : Fragment() {
 
         //Observing and Mapping Values.
         viewmodel.productDetails.observe(viewLifecycleOwner, Observer {
+
+            //Nutritional Info
             binding.carbs.text = "Carbs: " + it.product?.nutriments?.carbohydrates.toString() + it.product?.nutriments?.carbohydrates_unit.toString()
             binding.sugar.text = "Sugar: " + it.product?.nutriments?.sugars.toString() + it.product?.nutriments?.sugars_unit.toString()
             binding.energy.text = "Energy: " + it.product?.nutriments?.energy.toString() + it.product?.nutriments?.energy_unit.toString()
@@ -51,6 +53,10 @@ class ProductDetailFragment : Fragment() {
             binding.salt.text = "Salt Content: " + it.product?.nutriments?.salt.toString() + it.product?.nutriments?.salt_unit.toString()
             binding.saturatedFat.text = "Saturated Fat: " + it.product?.nutriments?.saturated_fat.toString() + it.product?.nutriments?.saturated_fat_unit.toString()
             binding.sodium.text = "Sodium: " + it.product?.nutriments?.sodium.toString() + it.product?.nutriments?.sodium_unit.toString()
+
+
+          /*  //ProductName
+            binding.productName.text = "Name: " + it.product?.product_name*/
 
             //Allergens
             binding.allergen.text = "Allergen: " + it.product?.allergens?.toString()
