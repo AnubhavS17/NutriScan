@@ -47,4 +47,14 @@
             android:defaultValue="">
         </argument>
     </fragment>
+    <fragment
+        android:id="@+id/register"
+        android:name="project.nutriscan.ui.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/login"
+        android:name="project.nutriscan.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

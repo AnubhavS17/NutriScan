@@ -1,5 +1,6 @@
 package project.nutriscan.ui
 
+import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import project.nutriscan.R
 import project.nutriscan.databinding.FragmentProfileBinding
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : androidx.fragment.app.Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
@@ -45,7 +46,15 @@ class ProfileFragment : Fragment() {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
 
+        //----------------Testing Screens-----------------.
+        binding.testRegister.setOnClickListener {
+            findNavController().navigate(R.id.register)
+        }
 
+        binding.testLogin.setOnClickListener {
+            findNavController().navigate(R.id.login)
+        }
+        //-------------------------------------------------
 
 
         return binding.root
@@ -60,7 +69,6 @@ class ProfileFragment : Fragment() {
         editor.putBoolean("dairy", isDairyChecked)
         editor.putBoolean("soy", isSoyChecked)
         editor.apply() // Save changes asynchronously
-
     }
 
     private fun loadCheckboxValues() {
