@@ -13,7 +13,7 @@ import project.nutriscan.repository.Repository
 import project.nutriscan.viewmodel.NutritionViewModel
 import project.nutriscan.viewmodel.ViewModelFactory
 
-class MainActivity : AppCompatActivity() {
+class  MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController : NavController

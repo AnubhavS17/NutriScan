@@ -5,6 +5,8 @@ data class Product(
     val _keywords: List<String>?,
     val id: String?,
     val allergens: String?,
+    val additives_tags : List<String>?,
+    val ingredients_text_en : String?,
     val product_name : String?,
     val image_front_small_url: String?,
     val image_front_thumb_url: String?,
