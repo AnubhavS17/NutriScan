@@ -12,7 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import coil.load
 import project.nutriscan.MainActivity
+import project.nutriscan.R
 import project.nutriscan.databinding.FragmentProductDetailBinding
+import project.nutriscan.utils.UtilityFunctions.Companion.getAdditiveFullName
 import project.nutriscan.viewmodel.NutritionViewModel
 
 class ProductDetailFragment : Fragment() {
@@ -91,40 +93,37 @@ class ProductDetailFragment : Fragment() {
             binding.productImage.load(imageUrl)
 
             // Extract additives tags
-            displayAdditivesTags(it.product?.additives_tags)
+            val additivesTags = (it?.product?.additives_tags)
+            displayAdditivesTags(additivesTags)
 
         })
-
-
-
-
-
-//        binding.CallAPI.setOnClickListener {
-//            viewmodel.searchProduct("8901491101837","nutriments")
-//            viewmodel.productDetails.observe(viewLifecycleOwner, Observer {
-//              binding.carbs.text = it.product?.nutriments?.carbohydrates.toString()
-//              binding.sugar.text = it.product?.nutriments?.sugars.toString()
-//            })
-//        }
 
 
         return binding.root
 
     }
 
-    private fun displayAdditivesTags(additivesTags: List<String>?) {
-        if (!additivesTags.isNullOrEmpty()) {
-            val formattedAdditives = additivesTags.mapIndexed { index, tag ->
-                "${index + 1}. $tag" // Format the tag with its index
-            }.joinToString("\n") // Join the list into a single string
+@SuppressLint("ResourceAsColor")
+private fun displayAdditivesTags(additivesTags: List<String>?) {
+    if (!additivesTags.isNullOrEmpty()) {
+        val formattedAdditives = additivesTags.map { tag ->
+            val convertedTag = convertTagFormat(tag) // Convert the tag format
+            val fullName = getAdditiveFullName(convertedTag) // Get the full name for the additive code
+            "$convertedTag - $fullName" // Format as "E330 - Zeeshan"
 
-            binding.additives.text = "Additives:\n$formattedAdditives"
-        } else {
-            binding.additives.text = "Additives not found."
-        }
+        }.joinToString("\n") // Join the list into a single string
+        binding.additives.text = "Additives:\n$formattedAdditives"
+        binding.additives.setTextColor(R.color.pastel_yellow)
+    } else {
+        binding.additives.text = "Additives not found."
     }
 
+}
 
+    fun convertTagFormat(tag: String): String {
+        // Remove the "en:" prefix and convert to uppercase
+        return tag.replace("en:", "").uppercase()
+    }
     fun formatAllergens(allergens: String?): String {
         if (allergens.isNullOrEmpty()) {
             return "No allergens available"

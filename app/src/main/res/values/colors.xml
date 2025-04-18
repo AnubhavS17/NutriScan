@@ -68,6 +68,8 @@
      <color name="white">#FFFFFFFF</color>
      <color name="primary">#B27CD9</color>
 
+     <color name="pastel_yellow">#DDEF3C</color>
+
 </resources>
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->
