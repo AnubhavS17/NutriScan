@@ -11,37 +11,39 @@
         <variable
             name="productInfo"
             type="project.nutriscan.model.Product" />
-
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- ScrollView to enable vertical scrolling -->
-        <android.widget.ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- LinearLayout for organizing content vertically -->
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
+            <!-- Product Image CardView -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/product_image_card"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_gravity="center"
-                tools:ignore="ExtraText">
+                android:background="@color/cardview_dark_background"
+                android:adjustViewBounds="true"
+                android:contentDescription="Product Image"
+                android:elevation="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHorizontal_bias="0.5">
 
-                <!-- Product Image -->
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/cardview_dark_background"
-                    android:adjustViewBounds="true"
-                    android:contentDescription="Product Image"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="220dp">
+                    android:padding="16dp"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/image_title"
@@ -60,138 +62,155 @@
                         android:adjustViewBounds="true"
                         android:contentDescription="Product Image"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_marginBottom="16dp"
+                        android:src="@drawable/ic_search_24" /> <!-- Placeholder image -->
 
-                </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
+            <!-- Nutritional Score TextView -->
+            <TextView
+                android:id="@+id/nutritional_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`Score:` + data.nutrition_score_fr }"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/product_image_card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"/>
 
-
-                <TextView
-                    android:id="@+id/nutritional_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{`Score:` + data.nutrition_score_fr }"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="4dp" />
-
-                <!-- Nutritional Information CardView -->
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/cardview_light_background">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <TextView
-                            android:id="@+id/nutritional_info_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nutritional Information"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
-
-                        <!-- Nutritional values in TextViews -->
-                        <TextView
-                            android:id="@+id/carbs"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Carbs:` + data.carbohydrates}"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/sugar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Sugar:` + data.sugars}"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/energy"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Energy:` + data.energy + `Kcal` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/fat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Fat:` + data.fat + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/fat_per_100g"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Fat per 100g:` + data.fat_100g + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/fiber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Fiber:` + data.fiber + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/proteins"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Protein:` + data.proteins + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/salt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Salt Content:` + data.salt + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/saturated_fat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Saturated Fat:` + data.saturated_fat + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-
-                        <TextView
-                            android:id="@+id/sodium"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{`Sodium:` + data.sodium + `g` }"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="16dp" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/cardview_light_background">
+            <!-- Nutritional Information CardView -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/nutritional_info_Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:layout_constraintTop_toBottomOf="@id/nutritional_score"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp">
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/nutritional_info_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nutritional Information"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Nutritional values in TextViews -->
+                    <TextView
+                        android:id="@+id/carbs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Carbs:` + data.carbohydrates}"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/sugar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Sugar:` + data.sugars}"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/energy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Energy:` + data.energy + `Kcal` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/fat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Fat:` + data.fat + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/fat_per_100g"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Fat per 100g:` + data.fat_100g + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/fiber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Fiber:` + data.fiber + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/proteins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Protein:` + data.proteins + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/salt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Salt Content:` + data.salt + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/saturated_fat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Saturated Fat:` + data.saturated_fat + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:id="@+id/sodium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Sodium:` + data.sodium + `g` }"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="16dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Ingredients Information CardView -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/Ingredients_Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:layout_constraintTop_toBottomOf="@id/nutritional_info_Card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
                     android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:padding="16dp">
 
                     <TextView
@@ -203,85 +222,95 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp" />
 
-                    <!-- Nutritional values in TextViews -->
                     <TextView
                         android:id="@+id/ingredients_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="8dp"
                         android:text="@{`Info :` + productInfo.ingredients_text}"
                         android:textSize="16sp"
                         android:layout_marginBottom="4dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-                <!-- Allergens Information CardView -->
-                <com.google.android.material.card.MaterialCardView
+            <!-- Allergens Information CardView -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/Allergen_Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:layout_constraintTop_toBottomOf="@id/Ingredients_Card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/cardview_light_background">
+                    android:padding="16dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/Allergen_info_title"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:text="Allergens Information"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
 
-                        <TextView
-                            android:id="@+id/Allergen_info_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Allergens Information"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:id="@+id/allergen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Allergen:` + productInfo.allergens}"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                        <TextView
-                            android:id="@+id/allergen"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text ="@{`Allergen:` + productInfo.allergens}"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+            <!-- Additives Information CardView -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardElevation="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:layout_constraintTop_toBottomOf="@id/Allergen_Card"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp">
 
-                <!-- Allergens Information CardView -->
-                <com.google.android.material.card.MaterialCardView
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/cardview_light_background">
+                    android:padding="16dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/Additives_info_title"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:text="Additives"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp" />
 
-                        <TextView
-                            android:id="@+id/Additives_info_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Additives"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="8dp" />
+                    <TextView
+                        android:id="@+id/additives"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`Additives:` + productInfo.additives_tags}"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                        <TextView
-                            android:id="@+id/additives"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text ="@{`Additives:` + productInfo.additives_tags}"
-                            android:textSize="16sp"
-                            android:layout_marginBottom="4dp" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-        </android.widget.ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>
