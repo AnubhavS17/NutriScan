@@ -40,7 +40,9 @@ class ProductDetailFragment : Fragment() {
         val barcode = args.barcode
         viewmodel.searchProduct(
             barcode,
-            "nutriments,allergens,image_url,additives_tags,ingredients_text_en"
+            "nutriments,allergens,image_url," +
+                    "additives_tags,ingredients_text_en," +
+                    "countries,ecoscore_grade,ecoscore_score,nutrient_levels_tags"
         )
 
         //Observing and Mapping Values.
@@ -99,10 +101,15 @@ class ProductDetailFragment : Fragment() {
             binding.ingredientsInfo.text =
                 "Contains: ${it.product?.ingredients_text_en ?: "No ingredients available"}"
 
+            //Nutrients_Level Summary
+            val nutrientsTags = (it?.product?.nutrient_levels_tags)
+            convertNutrientsSummary(nutrientsTags)
+
             //Allergens
             val formattedAllergens = formatAllergens(it.product?.allergens)
             binding.allergen.text = formattedAllergens
             binding.allergen.setTextColor(Color.RED)
+
 
             //Product Image
             val imageUrl = it.product?.image_url
@@ -112,11 +119,32 @@ class ProductDetailFragment : Fragment() {
             val additivesTags = (it?.product?.additives_tags)
             displayAdditivesTags(additivesTags)
 
+            //Countries Found
+            val formattedCountries = formatCountries(it.product?.countries)
+            binding.countries.text = formattedCountries
+
+            //Ecoscore
+            binding.ecoscoreGrade.text =
+                "Grade: ${it.product?.ecoscore_grade ?: "Not Found"}"
+            binding.ecoscoreScore.text =
+                "Score: ${it.product?.ecoscore_score ?: "Not Found"}"
         })
 
 
         return binding.root
 
+    }
+
+    private fun convertNutrientsSummary(nutrientsTags: List<String>?) {
+        if (!nutrientsTags.isNullOrEmpty()) {
+            val formattedTag = nutrientsTags.mapIndexed { index, tag ->
+                val convertedTag = tag.removePrefix("en:") // Remove the "en:" prefix
+                "${index + 1}. $convertedTag" // Format as "1. fat-in-high-quantity"
+            }.joinToString("\n") // Join the list into a single string
+            binding.nutrientsLevel.text = "List:\n$formattedTag"
+        } else {
+            binding.additives.text = "Cannot Generate Summary"
+        }
     }
 
     @SuppressLint("ResourceAsColor")
@@ -134,13 +162,13 @@ class ProductDetailFragment : Fragment() {
         } else {
             binding.additives.text = "Additives not found."
         }
-
     }
 
     fun convertTagFormat(tag: String): String {
         // Remove the "en:" prefix and convert to uppercase
         return tag.replace("en:", "").uppercase()
     }
+
 
     fun formatAllergens(allergens: String?): String {
         if (allergens.isNullOrEmpty()) {
@@ -155,6 +183,19 @@ class ProductDetailFragment : Fragment() {
                     ""
                 )
             }"
+        }
+            .joinToString("\n")
+    }
+
+
+    fun formatCountries(countries: String?): String {
+        if (countries.isNullOrEmpty()) {
+            return "No countries found"
+        }
+
+        val countriesList = countries.split(",").map { it.trim() }
+        return countriesList.mapIndexed { index, countries ->
+            "${index + 1}. ${countries}"
         }
             .joinToString("\n")
     }
