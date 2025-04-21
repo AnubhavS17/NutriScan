@@ -41,14 +41,29 @@ class ProductDetailFragment : Fragment() {
         viewmodel.searchProduct(
             barcode,
             "nutriments,allergens,image_url," +
-                    "additives_tags,ingredients_text_en," +
-                    "countries,ecoscore_grade,ecoscore_score,nutrient_levels_tags"
+                    "additives_tags,ingredients_text_en,ingredients" +
+                    "countries,ecoscore_grade,ecoscore_score," +
+                    "nutrient_levels_tags,product_name,brands,manufacturing_places"
         )
+
+
+
 
         //Observing and Mapping Values.
         viewmodel.productDetails.observe(viewLifecycleOwner, Observer {
 
-            //Nutriments
+            //Product Info Card
+            binding.productName.text =
+                "Name: " + (it.product?.product_name?.toString() ?: "Not Found")
+
+            binding.productBrands.text =
+                "Brand: " + (it.product?.brands?.toString() ?: "Not Found")
+
+            binding.productManufacturing.text =
+                "Manufactured In: " + (it.product?.manufacturing_places?.toString() ?: "Not Found")
+
+
+            //Nutriments Card
             binding.carbs.text =
                 "Carbs: " + (it.product?.nutriments?.carbohydrates?.toString() ?: "Not Found") +
                         (it.product?.nutriments?.carbohydrates_unit ?: "")
@@ -108,7 +123,7 @@ class ProductDetailFragment : Fragment() {
             //Allergens
             val formattedAllergens = formatAllergens(it.product?.allergens)
             binding.allergen.text = formattedAllergens
-            binding.allergen.setTextColor(Color.RED)
+            //binding.allergen.setTextColor(Color.RED)
 
 
             //Product Image
@@ -129,6 +144,7 @@ class ProductDetailFragment : Fragment() {
             binding.ecoscoreScore.text =
                 "Score: ${it.product?.ecoscore_score ?: "Not Found"}"
         })
+
 
 
         return binding.root
@@ -158,7 +174,6 @@ class ProductDetailFragment : Fragment() {
 
             }.joinToString("\n") // Join the list into a single string
             binding.additives.text = "Additives:\n$formattedAdditives"
-            binding.additives.setTextColor(R.color.pastel_yellow)
         } else {
             binding.additives.text = "Additives not found."
         }

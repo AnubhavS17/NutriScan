@@ -8,7 +8,6 @@ data class Product(
     val additives_tags : List<String>?,
     val nutrient_levels_tags: List<String>?,
     val ingredients_text_en : String?,
-    val product_name : String?,
     val countries : String?,
     val ecoscore_grade : String?,
     val ecoscore_score: Int?,
@@ -44,7 +43,6 @@ data class Product(
     val lc: String?,
     val link: String?,
     val main_countries_tags: List<Any>?,
-    val manufacturing_places: String?,
     val manufacturing_places_tags: List<Any>?,
     val max_imgid: String?,
     val minerals_tags: List<Any>?,
@@ -66,5 +64,13 @@ data class Product(
     val nutriscore_grade: String?,
     val nutriscore_score: Int?,
     val nutriscore_score_opposite: Int?,
-    val nutriscore_tags: List<String>?
+    val nutriscore_tags: List<String>?,
+
+    //Product info
+    val manufacturing_places: String?,
+    val product_name : String?,
+    val brands : String?,
+
+
+
 )

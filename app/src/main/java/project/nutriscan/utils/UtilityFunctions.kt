@@ -89,6 +89,7 @@ class UtilityFunctions {
                 "E160E" to "Ethyl ester of beta-apo-8′-carotenal",
                 "E161" to "Flavoxanthin",
                 "E171" to "Titanium Dioxide",
+                "E170" to "Calcium Carbonate",
                 "E172" to "Iron Oxides",
                 "E173" to "Aluminum",
 
@@ -143,6 +144,7 @@ class UtilityFunctions {
                 "E319" to "Tertiary-butyl hydroquinone (TBHQ)",
                 "E320" to "Butylated hydroxyanisole (BHA)",
                 "E322" to "Lecithins",
+                "E322I" to "Sodium salt of sulfurous acid",
                 "E321" to "Butylated hydroxytoluene (BHT)",
                 "E330" to "Citric Acid",
                 "E331" to "Sodium Citrate",
@@ -185,6 +187,7 @@ class UtilityFunctions {
                 "E442" to "Ammonium phosphatide",
                 "E444" to "Sucrose acetate isobutyrate",
                 "E445" to "Glycerol esters of wood rosins",
+                "E450" to "Sodium and potassium Diphosphates",
                 "E451" to "Triphosphates",
                 "E460" to "Cellulose",
                 "E461" to "Methyl cellulose",
@@ -297,7 +300,6 @@ class UtilityFunctions {
             )
 
             // Return the full name or "Unknown Additive" if not found
-
             return additivesMap[code] ?: "Unknown Additive"
 
         }
