@@ -4,45 +4,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splash_gradient_background"
     tools:context=".ui.SplashScreen">
 
-
-    <ImageView
-        android:id="@+id/barcode_icon"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="180dp"
-        android:src="@drawable/barcode_icon"
+    <!-- Background decorative elements -->
+    <View
+        android:id="@+id/circle_decoration_1"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:alpha="0.1"
+        android:background="@drawable/circle_decoration"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/AppName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NutriScan"
-        android:textAlignment="center"
-        android:textSize="44sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barcode_icon" />
+    <View
+        android:id="@+id/circle_decoration_2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="150dp"
+        android:alpha="0.08"
+        android:background="@drawable/circle_decoration"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/intro"
+    <!-- Main content container -->
+    <LinearLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:padding="10dp"
-        android:text="Know your food better."
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AppName" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/barcode_icon"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:contentDescription="NutriScan Logo"
+            android:src="@drawable/barcode_icon"
+            app:tint="@color/white" />
+
+        <!-- Logo container with shadow -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/logo_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            app:cardBackgroundColor="@color/logo_background"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="12dp">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- App name with enhanced styling -->
+        <TextView
+            android:id="@+id/AppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:letterSpacing="0.05"
+            android:text="NutriScan"
+            android:textColor="@color/app_name_color"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <!-- Tagline with improved styling -->
+        <TextView
+            android:id="@+id/intro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:alpha="0.8"
+            android:letterSpacing="0.02"
+            android:text="Know your food better."
+            android:textColor="@color/tagline_color"
+            android:textSize="18sp" />
+
+        <!-- Feature highlights -->
+        <LinearLayout
+            android:id="@+id/features_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginBottom="4dp"
+                    android:src="@drawable/ic_search_24"
+                    app:tint="@color/feature_icon_tint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scan"
+                    android:textColor="@color/feature_text_color"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginBottom="4dp"
+                    android:src="@drawable/ic_analyze"
+                    app:tint="@color/feature_icon_tint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Analyze"
+                    android:textColor="@color/feature_text_color"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginBottom="4dp"
+                    android:src="@drawable/ic_decide"
+                    app:tint="@color/feature_icon_tint" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Decide"
+                    android:textColor="@color/feature_text_color"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- Version info -->
+    <TextView
+        android:id="@+id/version_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:alpha="0.6"
+        android:text="Version 1.0.0"
+        android:textColor="@color/version_text_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

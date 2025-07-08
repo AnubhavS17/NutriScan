@@ -46,9 +46,6 @@ class ProductDetailFragment : Fragment() {
                     "nutrient_levels_tags,product_name,brands,manufacturing_places"
         )
 
-
-
-
         //Observing and Mapping Values.
         viewmodel.productDetails.observe(viewLifecycleOwner, Observer {
 
@@ -205,7 +202,7 @@ class ProductDetailFragment : Fragment() {
 
     fun formatCountries(countries: String?): String {
         if (countries.isNullOrEmpty()) {
-            return "No countries found"
+            return "Cannot Determine"
         }
 
         val countriesList = countries.split(",").map { it.trim() }
