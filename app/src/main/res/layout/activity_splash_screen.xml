@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_gradient_background"
+    android:background="@drawable/background_main"
     tools:context=".ui.SplashScreen">
 
     <!-- Background decorative elements -->
@@ -49,8 +49,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:contentDescription="NutriScan Logo"
-            android:src="@drawable/barcode_icon"
-            app:tint="@color/white" />
+            android:src="@drawable/barcode_icon" />
 
         <!-- Logo container with shadow -->
         <com.google.android.material.card.MaterialCardView
@@ -73,7 +72,7 @@
             android:layout_marginBottom="8dp"
             android:letterSpacing="0.05"
             android:text="NutriScan"
-            android:textColor="@color/app_name_color"
+            android:textColor="@color/pastel_blue"
             android:textSize="48sp"
             android:textStyle="bold" />
 
@@ -86,7 +85,7 @@
             android:alpha="0.8"
             android:letterSpacing="0.02"
             android:text="Know your food better."
-            android:textColor="@color/tagline_color"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
         <!-- Feature highlights -->
@@ -110,13 +109,13 @@
                     android:layout_height="34dp"
                     android:layout_marginBottom="4dp"
                     android:src="@drawable/ic_search_24"
-                    app:tint="@color/feature_icon_tint" />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Scan"
-                    android:textColor="@color/feature_text_color"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -133,13 +132,13 @@
                     android:layout_height="34dp"
                     android:layout_marginBottom="4dp"
                     android:src="@drawable/ic_analyze"
-                    app:tint="@color/feature_icon_tint" />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Analyze"
-                    android:textColor="@color/feature_text_color"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -155,13 +154,13 @@
                     android:layout_height="34dp"
                     android:layout_marginBottom="4dp"
                     android:src="@drawable/ic_decide"
-                    app:tint="@color/feature_icon_tint" />
+                    app:tint="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Decide"
-                    android:textColor="@color/feature_text_color"
+                    android:textColor="@color/black"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -177,9 +176,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:alpha="0.6"
+        android:alpha="0.8"
         android:text="Version 1.0.0"
-        android:textColor="@color/version_text_color"
+        android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

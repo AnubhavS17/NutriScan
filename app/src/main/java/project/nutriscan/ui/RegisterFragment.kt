@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.room.util.findColumnIndexBySuffix
+import project.nutriscan.R
 import project.nutriscan.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -26,8 +29,17 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        binding.loginLink.setOnClickListener {
+            navigateRegisterToLogin()
+        }
+
         return binding.root
 
+
+    }
+
+    private fun navigateRegisterToLogin(){
+        findNavController().navigate(R.id.action_register_to_login)
     }
 
     private fun validateFields(): Boolean {
