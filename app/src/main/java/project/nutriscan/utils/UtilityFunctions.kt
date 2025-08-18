@@ -1,13 +1,12 @@
 package project.nutriscan.utils
 
+import project.nutriscan.model.AdditiveInfo
+
 class UtilityFunctions {
-
     companion object {
-
         fun getAdditiveFullName(code: String): String {
-
-            // Map of additive codes to their full names
-            val additivesMap = mapOf(
+            // --- Additive Full Names Map ---
+             val additivesMap = mapOf(
                 // E100–E199: Colours
                 "E100" to "Curcumin",
                 "E101" to "Riboflavin (Vitamin B2)",
@@ -351,6 +350,102 @@ class UtilityFunctions {
 
             // Return the full name or "Unknown Additive" if not found
             return additivesMap[code] ?: "Unknown Additive"
+
+        }
+
+        // --- Converts 'en:e150d' or 'e150d' to 'E150D' ---
+        fun convertTagFormat(tag: String?): String {
+            if (tag.isNullOrBlank()) return ""
+            return tag.substringAfter(":").uppercase()
+        }
+
+
+        // --- Gets category from code ---
+        fun getAdditiveCategory(code: String): String {
+            val digits = Regex("""\d+""").find(code)?.value?.toIntOrNull() ?: return "Other"
+            return when (digits) {
+                in 100..199 -> "Colours"
+                in 200..299 -> "Preservatives"
+                in 300..399 -> "Antioxidants / Acidity Regulators"
+                in 400..499 -> "Thickeners / Stabilizers / Emulsifiers"
+                in 500..599 -> "Acidity Regulators / Anti-caking Agents"
+                in 600..699 -> "Flavour Enhancers"
+                in 700..799 -> "Antibiotics"
+                in 900..999 -> "Glazing Agents / Gases / Sweeteners"
+                in 1000..1599 -> "Other Additives"
+                else -> "Other"
+            }
+        }
+
+        // --- Gets safety information for code ---
+        fun getAdditiveSafetyInfo(code: String): String {
+            val riskyCodes = setOf("E102", "E110", "E124", "E129", "E621")
+            val avoidForChildren = setOf("E102", "E104", "E110", "E122", "E124", "E129")
+
+            return when {
+                code in riskyCodes -> "Use with caution – may cause allergic reactions"
+                code in avoidForChildren -> "Avoid in children – linked to hyperactivity"
+                code == "E621" -> "MSG – may cause sensitivity in some individuals"
+                code.startsWith("E3") -> "Generally safe – natural antioxidant"
+                else -> "Generally recognized as safe in permitted amounts"
+            }
+        }
+
+        //Health Concerns.
+        fun getAdditiveHealthConcerns(code: String): String {
+            // Additives linked to cancer concerns
+            val cancerLinked = setOf("E102", "E110", "E124", "E127", "E131", "E142", "E320", "E321")
+
+            // Additives linked to allergic reactions
+            val allergyTriggers = setOf("E102", "E104", "E110", "E122", "E124", "E129", "E131", "E132", "E133", "E151", "E220", "E221", "E222", "E223", "E224")
+
+            // Additives linked to hyperactivity in children (Southampton Six + others)
+            val hyperactivityLinked = setOf("E102", "E104", "E110", "E122", "E124", "E129")
+
+            // Additives linked to digestive issues
+            val digestiveIssues = setOf("E220", "E221", "E222", "E223", "E224", "E249", "E250", "E251", "E252", "E954", "E965", "E966", "E967")
+
+            // Additives linked to respiratory problems
+            val respiratoryIssues = setOf("E220", "E221", "E222", "E223", "E224", "E225")
+
+            // Additives linked to cardiovascular concerns
+            val cardiovascularConcerns = setOf("E621", "E622", "E623", "E624", "E625", "E250", "E251")
+
+            // Additives linked to neurological concerns
+            val neurologicalConcerns = setOf("E621", "E951", "E954")
+
+            // Additives linked to hormonal disruption
+            val hormonalDisruption = setOf("E320", "E321")
+
+            // Additives potentially harmful during pregnancy
+            val pregnancyConcerns = setOf("E951", "E954", "E249", "E250", "E320", "E321")
+
+            return when {
+                code in cancerLinked -> "Potential cancer risk - studies suggest possible carcinogenic effects"
+                code in hyperactivityLinked -> "ADHD/Hyperactivity - linked to behavioral issues in children"
+                code in allergyTriggers -> "Allergic reactions - may cause skin rashes, hives, or breathing difficulties"
+                code in digestiveIssues -> "Digestive problems - may cause nausea, stomach upset, or diarrhea"
+                code in respiratoryIssues -> "Respiratory issues - may trigger asthma or breathing problems"
+                code in cardiovascularConcerns -> "Heart/blood pressure concerns - may affect cardiovascular health"
+                code in neurologicalConcerns -> "Neurological effects - potential headaches or brain-related symptoms"
+                code in hormonalDisruption -> "Hormonal disruption - may interfere with endocrine system"
+                code in pregnancyConcerns -> "Pregnancy concerns - not recommended during pregnancy or breastfeeding"
+                code.startsWith("E1") -> "Cosmetic coloring - generally safe but may cause reactions in sensitive individuals"
+                code.startsWith("E3") -> "Antioxidant properties - generally beneficial for health"
+                code.startsWith("E4") -> "Texture modifier - usually safe, derived from natural sources"
+                else -> "No major health concerns reported - considered safe in normal consumption levels"
+            }
+        }
+
+
+        // --- Get Full Additive Info with Code Conversion ---
+        fun getFullAdditiveInfo(rawTag: String): AdditiveInfo {
+            val code = convertTagFormat(rawTag)
+            val fullName = getAdditiveFullName(code)
+            val category = getAdditiveCategory(code)
+            val safetyInfo = getAdditiveSafetyInfo(code)
+            val healthConcerns = getAdditiveHealthConcerns(code)
+            return AdditiveInfo(code, fullName, category, safetyInfo, healthConcerns)
         }
     }
 }

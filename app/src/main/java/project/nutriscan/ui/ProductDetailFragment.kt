@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import project.nutriscan.MainActivity
@@ -164,17 +165,28 @@ class ProductDetailFragment : Fragment() {
     private fun displayAdditivesTags(additivesTags: List<String>?) {
         if (!additivesTags.isNullOrEmpty()) {
             val formattedAdditives = additivesTags.map { tag ->
-                val convertedTag = convertTagFormat(tag) // Convert the tag format
-                val fullName =
-                    getAdditiveFullName(convertedTag) // Get the full name for the additive code
-                "$convertedTag - $fullName" // Format as "E330 - Zeeshan"
+                val convertedTag = convertTagFormat(tag)
+                val fullName = getAdditiveFullName(convertedTag)
+                "$convertedTag - $fullName"
+            }.joinToString("\n") // Only returns a list of strings!
 
-            }.joinToString("\n") // Join the list into a single string
             binding.additives.text = "Additives:\n$formattedAdditives"
+
+            // Set click listener and properties ONCE, not for each tag
+            binding.additives.setOnClickListener {
+                navigateToAdditivesDetail(additivesTags)
+            }
+            binding.additives.isClickable = true
+            binding.additives.isFocusable = true
+
         } else {
             binding.additives.text = "Additives not found."
+            binding.additives.setOnClickListener(null)
+            binding.additives.isClickable = false
+            binding.additives.isFocusable = false
         }
     }
+
 
     fun convertTagFormat(tag: String): String {
         // Remove the "en:" prefix and convert to uppercase
@@ -211,5 +223,18 @@ class ProductDetailFragment : Fragment() {
         }
             .joinToString("\n")
     }
+
+    private fun navigateToAdditivesDetail(additivesTags: List<String>) {
+        val action = ProductDetailFragmentDirections
+            .actionProductDetailFragmentToAdditivesDetailFragment(additivesTags.toTypedArray())
+        findNavController().navigate(action)
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }
