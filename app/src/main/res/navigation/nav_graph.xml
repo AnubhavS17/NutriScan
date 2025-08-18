@@ -46,6 +46,9 @@
             app:argType="string"
             android:defaultValue="">
         </argument>
+        <action
+            android:id="@+id/action_productDetailFragment_to_additivesDetailFragment"
+            app:destination="@id/additivesDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/register"
@@ -86,4 +89,15 @@
             />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/additivesDetailFragment"
+        android:name="project.nutriscan.ui.AdditivesDetailFragment"
+        android:label="fragment_additives_detail"
+        tools:layout="@layout/fragment_additives_detail">
+        <argument
+            android:name="additives"
+            app:argType="string[]" />
+    </fragment>
+
 </navigation>
