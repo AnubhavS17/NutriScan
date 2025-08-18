@@ -180,6 +180,7 @@ class ProductDetailFragment : Fragment() {
             binding.additives.isFocusable = true
 
         } else {
+            //onclick();
             binding.additives.text = "Additives not found."
             binding.additives.setOnClickListener(null)
             binding.additives.isClickable = false
